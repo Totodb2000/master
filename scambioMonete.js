@@ -2,7 +2,7 @@
 //restituire una sequenza di interi, che rappresentano il cambio della quantità di denaro iniziale nei tagli disponibili. Attenzione, 
 //bisogna tentare di minimizzare la quantità di banconote restituita
 
-let somma=54;
+let somma=540;
 let tagli=[500,200,100,50,20,10,5,2,1,0.50,0.20,0.10,0.05,0.02,0.01];
 
 function max(somma,tagli){
