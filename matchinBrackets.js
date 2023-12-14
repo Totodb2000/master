@@ -6,7 +6,7 @@ Ad esempio,
 
 non è valida perchè la parentesi graffa viene chiusa prima che venga chiusa la tonda.*/
 
-let frase="{}[(])";
+let frase="({}[(])";
 
 function isValid(frase){
     let graffeAperte=0;
