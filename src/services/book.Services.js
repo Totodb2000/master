@@ -32,7 +32,7 @@ getBookById : async function (id,usr) {
     return publicbook;
     }
     else{
-      const myBook = await Book.findOne({ _id:id, $and: [{ visibility: 'private' }, { author: usr.username }] })
+      const myBook = await Book.findOne({ _id:id, $and: [{ visibility: 'private' }, { author: usr.usernameQ }] })
       return myBook
     }
   } catch (error) {

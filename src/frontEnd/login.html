@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="login.css">
+        <script>function accedi(){
+            var username = document.getElementById('username').value
+            var password = document.getElementById('password').value
+
+            var autenticate = {
+                username: username,
+                password: password,
+            };
+
+            fetch( ' /api/auth/login' ,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Errore nella richiesta');
+            }
+            return response.json();
+        })
+
+        }
+        </script>
+    </head>
+    <body>
+        <div>
+            <ul>
+                <li><input type="text" id="username" placeholder="username" required></li>
+                <li><input type="text" id="password" placeholder="password" required></li>
+                <li><button type="button" id="Accedi" onclick="accedi()">Accedi</li>
+            </ul>
+        </div>
+    </body>
+
+</html>

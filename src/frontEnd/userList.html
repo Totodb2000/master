@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco Utenti</title>
+    <link rel="stylesheet" href="userList.css">
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('http://localhost:3001/progetto/api/users', {
+                method: 'GET', // Specifica il metodo HTTP GET
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const userData = document.getElementById('userData');
+
+                    data.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td>${user.nome}</td>
+                        <td>${user.cognome}</td>
+                        <td>${user.ruolo}</td>
+                    `;
+                        userData.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Si è verificato un errore nella richiesta:', error));
+        });
+    </script>
+</head>
+
+<body>
+    <h2>Elenco Utenti</h2>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Ruolo</th>
+            </tr>
+        </thead>
+        <tbody id="userData">
+            <!-- Qui verranno inseriti dinamicamente i dati degli utenti -->
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina di login</title>
+    <link rel="stylesheet" href="index.css">
+    <script>function inviaForm() {
+    
+        var username = document.getElementById('Username').value;
+        var password = document.getElementById('Password').value;
+        var nome = document.getElementById('nomeInput').value;
+        var cognome = document.getElementById('cognomeInput').value;
+        var ruolo = document.getElementById('Ruolo').value;
+    
+    
+        var userData = {
+            username: username,
+            password: password,
+            nome: nome,
+            cognome: cognome,
+            ruolo: ruolo
+        };
+        //inviaAlBackend(userData);
+    
+        // function inviaAlBackend(userData) {
+        //     // Simulazione di invio dei dati al backend (mostra i dati nella console)
+        //     console.log("Dati inviati al backend:", userData);
+        //    // alert("Dati inviati con successo!");
+        //     // Potresti inserire qui la logica per inviare i dati a un server backend locale usando AJAX o fetch
+        // }
+    
+        fetch('http://localhost:3001/progetto/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Errore nella richiesta');
+            }
+            console.log("sending...")
+            return response.json();
+        })
+        .then(data => {
+         
+             document.getElementById('Username').value = '';
+             document.getElementById('Password').value = '';
+             document.getElementById('nomeInput').value = '';
+             document.getElementById('cognomeInput').value = '';
+             document.getElementById('Ruolo').value = '';
+     
+             // Puoi gestire la risposta qui
+             console.log('Risposta:', data);
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+        });
+    }
+</script>
+</head>
+<body>
+    <h1>Demetrix book system</h1>
+    <table>
+        <tr>
+            <th>Menù di navigazione </th>
+            <th><input type="text" id="searchBar" placeholder="Cerca Utente" oninput="searchUsers()"></th>
+            <th>Form Registrazione nuovo Utente</th>
+        </tr>
+        <
+            <td>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="userList.html">Lista Utenti</a></li>
+                    <li><a href="#">Impostazioni</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </td>
+            <td>
+                <table id="userTable">
+                
+                </table>
+                <div id="loadingSpinner" style="display: none;">Loading...</div>
+                <div id="emptyListMessage" style="display: none;">Nessun utente trovato.</div>
+            </td>
+            <td>
+                <ul>
+                    <li><input type="text" id="Username" placeholder="Username" required></li>
+                    <li><input type="text" id="Password" placeholder="Password" required></li>
+                    <li><input type="text" id="nomeInput" placeholder="Nome" required></li>
+                    <li><input type="text" id="cognomeInput" placeholder="Cognome" required></li>
+                    <li><input type="text" id="Ruolo" placeholder="Ruolo" required></li>
+                    <li><button type="button" onclick="inviaForm()">Aggiungi Utente</button></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
